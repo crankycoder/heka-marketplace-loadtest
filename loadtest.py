@@ -329,8 +329,7 @@ class MarketplaceTest(FunkLoadTestCase):
     def test_marketplace(self):
         """ 
         Run :
-            test_end_user
-            test_developer
+            test_cef
         """
         #self.test_developer()
         #self.test_end_user()
@@ -338,7 +337,8 @@ class MarketplaceTest(FunkLoadTestCase):
 
     def test_cef(self): 
         """ 
-        fire CEF messages by hitting the CSP report
+        this should fire off statsd and cef messages by hitting the
+        CSP report
 
         This requires that you have run:
 
