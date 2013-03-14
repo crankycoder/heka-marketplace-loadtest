@@ -8,6 +8,7 @@ import unicodedata
 import uuid
 import urllib2
 
+from funkload.utils import Data
 from funkload.FunkLoadTestCase import FunkLoadTestCase
 from webunit.utility import Upload
 
@@ -43,8 +44,6 @@ class MarketplaceTest(FunkLoadTestCase):
         self.lang = 'en-US'
         self._apps = None
         self._categories = None
-        self.choices = ([self.test_editor] * 2 + [self.test_developer] * 8 +
-                        [self.test_end_user] * 10 + [self.test_anonymous] * 80)
 
     def setBasicAuth(self, username, password):
         '''Set the Basic authentication information to the given username
@@ -328,14 +327,38 @@ class MarketplaceTest(FunkLoadTestCase):
         pass
 
     def test_marketplace(self):
-        """ Current rates:
-
-            - test_anonymous: 80%
-            - test_end_user: 10%
-            - test_developer: 8%
-            - test_editor: 2%
+        """ 
+        Run :
+            test_end_user
+            test_developer
         """
-        random.choice(self.choices)()
+        #self.test_developer()
+        #self.test_end_user()
+        self.test_cef() 
+
+    def test_cef(self): 
+        """ 
+        fire CEF messages by hitting the CSP report
+
+        This requires that you have run:
+
+            mysql> update waffle_sample_mkt set percent = 100 where name = 'csp-store-reports';
+
+        in advance.
+        """
+
+        url = 'http://foo.com'
+        jdata = json.dumps({'csp-report': {'document-uri': url}})
+
+        self.post("/services/csp/report",
+                          params=Data('application/json', jdata),
+                                description="Call CSP API")
+
+
+    def test_errors(self):
+        # TODO: just POST to the divide by zero generate-admin page
+        pass
+
 
 
 def add_csrf_token(response, params):
