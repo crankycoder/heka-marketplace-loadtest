@@ -35,7 +35,7 @@ if not os.path.exists(SCREENSHOT):
        f.write(urllib2.urlopen(GITHUB + 'screenshot.png').read())
 
 
-class MarketplaceTest(FunkLoadTestCase):
+class HekaMarketplaceTest(FunkLoadTestCase):
 
     def __init__(self, *args, **kwargs):
         super(MarketplaceTest, self).__init__(*args, **kwargs)
