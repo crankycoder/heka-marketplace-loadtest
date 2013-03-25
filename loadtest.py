@@ -38,7 +38,7 @@ if not os.path.exists(SCREENSHOT):
 class HekaMarketplaceTest(FunkLoadTestCase):
 
     def __init__(self, *args, **kwargs):
-        super(MarketplaceTest, self).__init__(*args, **kwargs)
+        super(HekaMarketplaceTest, self).__init__(*args, **kwargs)
 
         self.root = self.conf_get('main', 'url')
         self.lang = 'en-US'
@@ -65,12 +65,12 @@ class HekaMarketplaceTest(FunkLoadTestCase):
         # method.
         self.setHeader('Accept-Languages', self.lang)
         self.setHeader('User-Agent', USER_AGENT)
-        return super(MarketplaceTest, self).get(self.root + url,
+        return super(HekaMarketplaceTest, self).get(self.root + url,
                                                 load_auto_links=False,
                                                 *args, **kwargs)
 
     def post(self, url, *args, **kwargs):
-        return super(MarketplaceTest, self).post(self.root + url,
+        return super(HekaMarketplaceTest, self).post(self.root + url,
             load_auto_links=False, *args, **kwargs)
 
     @property
