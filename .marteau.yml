@@ -1,9 +1,9 @@
-name: MarketPlace
-test: MarketplaceTest.test_marketplace
+name: HekaMarketPlace
+test: HekaMarketplaceTest.test_marketplace
 script: loadtest.py
 xml: simple-bench.xml
 nodes: 9
 cycles: 30
-duration: 120
+duration: 30
 deps:
     - gevent
